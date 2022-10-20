@@ -3,6 +3,8 @@
   # Defines the root path route ("/")
   # root "articles#index"
 Rails.application.routes.draw do
+  get 'static_pages/home'
+  get 'static_pages/help'
 
   root "application#hello"
 end
