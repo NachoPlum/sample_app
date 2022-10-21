@@ -1,7 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
-require "minitest/reporters"
+require "minitest/reporters" #Genera los reportes para mejor visualizacion
 Minitest::Reporters.use!
 
 class ActiveSupport::TestCase

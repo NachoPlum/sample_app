@@ -3,12 +3,22 @@ require "test_helper"
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
 
   def setup
+    #DRY
+    #Crea la variable base_title con el string que se repite
     @base_title = "Ruby on Rails Tutorial Sample App"
   end
 
-  test "should get home" do
+  test "should get root" do
     get static_pages_home_url
     assert_response :success
+  end
+
+  test "should get home" do
+    #Verifica que exista la pagina llamada
+    get static_pages_home_url
+    #Corrobora que haya una respuesta exitosa 200 en el server
+    assert_response :success
+    #Corrobora que el tag title tenga la palabra correcta
     assert_select "title", "Home | #{@base_title}"
   end
 

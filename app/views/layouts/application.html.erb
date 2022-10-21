@@ -1,6 +1,8 @@
+<%#Este layout es justamente una template para que evita repetir codigo innecesario%>
 <!DOCTYPE html>
 <html>
   <head>
+    <%# Aplica la estructura del titulo a todas las paginas que se rellenan con el provide en cada una de ellas a traves del "yield"%>
     <head> <title><%= yield (:title) %> | Ruby on Rails Tutorial Sample App</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset='utf-8'>
@@ -11,6 +13,7 @@
   </head>
 
   <body>
+    <%# Este yield se rellena con lo que hay en cada pagina%>
     <%= yield %>
   </body>
 </html>
