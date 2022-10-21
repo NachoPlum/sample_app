@@ -19,7 +19,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     #Corrobora que haya una respuesta exitosa 200 en el server
     assert_response :success
     #Corrobora que el tag title tenga la palabra correcta
-    assert_select "title", "Home | #{@base_title}"
+    assert_select "title", "#{@base_title}"
   end
 
   test "should get help" do
