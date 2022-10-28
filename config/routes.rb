@@ -3,6 +3,7 @@
   # Defines the root path route ("/")
   # root "articles#index"
   Rails.application.routes.draw do
+    get 'users/new'
 
     root "static_pages#home"
 
