@@ -42,7 +42,7 @@ first.last@foo.jp alice+bob@baz.cn]
     invalid_addresses = %w[user@exmample,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.org foo@bar..com]
     invalid_addresses.each do |invalid_address|
       @user.email = invalid_address
-      assert_not @user.valid?, "#{invalid_address.inspect} should be valid"
+      assert_not @user.valid?, "#{invalid_address.inspect} should be valid, like this: user@example.com"
     end
   end
 
@@ -71,16 +71,16 @@ first.last@foo.jp alice+bob@baz.cn]
 
   test "password should not contain only characters" do
     @user.password = @user.password_confirmation = "password"
-    assert_not @user.valid?
+    assert_not @user.valid?, "Password should not contain only characters"
   end
   test "password should not contain only numbers" do
     @user.password = @user.password_confirmation = "12345678"
-    assert_not @user.valid?
+    assert_not @user.valid?, "Password should not contain only numbers"
   end
 
-  test "password should be present (nonblank)" do
+  test "Password should contain at least one number" do
     @user.password = @user.password_confirmation = " " * 6
-    assert_not @user.valid?
+    assert_not @user.valid?, "Password should contain at least one number"
   end
 
 end
