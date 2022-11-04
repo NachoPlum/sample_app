@@ -13,4 +13,11 @@ class User < ApplicationRecord
   # Validando, Min 8 char, Min 1 numero Min 1 Minuscula, Min 1 Mayuscula y Min 1 Simbolo
   #validates :password, format: PASSWORD_REQUERIMENTS
   validates :password, presence: true, length: { minimum: 8 }, format: PASSWORD_REQUERIMENTS
+
+  # Returns the hash digest of the given string.
+  def User.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+    BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 end
