@@ -3,7 +3,8 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
 
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com", password: "Foobar$3", password_confirmation: "Foobar$3")
+    @user = User.new(name: "Example User", email: "user@example.com",
+                    password:"Foobar$3", password_confirmation: "Foobar$3")
   end
 
   test "should be valid" do
@@ -81,6 +82,10 @@ first.last@foo.jp alice+bob@baz.cn]
   test "Password should contain at least one number" do
     @user.password = @user.password_confirmation = " " * 6
     assert_not @user.valid?, "Password should contain at least one number"
+  end
+
+  test "authenticated? should return false for a user with nil digest" do
+    assert_not @user.authenticated?('')
   end
 
 end

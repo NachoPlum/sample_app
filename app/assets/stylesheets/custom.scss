@@ -20,7 +20,7 @@ $coconut: #FDFDFD;
 $whisper:#eaeaea;
 $very-dark-gray:#222;
 
-/*forms */
+/* forms */
 input, textarea, select, .uneditable-input {
 border: 1px solid #bbb;
 width: 100%;
@@ -43,7 +43,19 @@ height: auto !important;
     color: $state-danger-text;
     }
     }
+.checkbox{
+    margin-top: -10px;
+    margin-bottom: 10px;
+    span {
+        margin-left: 20px;
+        font-weight: normal;
+    }
+}
 
+#session_remember_me{
+    width: auto;
+    margin-left: 0;
+}
 /* universal */
 body {
         background-color: $coconut;

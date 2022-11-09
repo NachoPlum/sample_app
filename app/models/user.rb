@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :remember_token
   before_save { email.downcase! }
   #Validacion name, presencia, largo
   validates :name, presence: true, length: { maximum: 50 }
@@ -14,10 +15,37 @@ class User < ApplicationRecord
   #validates :password, format: PASSWORD_REQUERIMENTS
   validates :password, presence: true, length: { minimum: 8 }, format: PASSWORD_REQUERIMENTS
 
-  # Returns the hash digest of the given string.
-  def User.digest(string)
-    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-    BCrypt::Engine.cost
-    BCrypt::Password.create(string, cost: cost)
-  end
+    # Returns the hash digest of the given string.
+    def self.digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+      BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
+
+    #Devuelve un token random de 22 caracteres
+    def self.new_token
+      SecureRandom.urlsafe_base64
+    end
+
+    # Guarda al usuario en la base de datos para usarlo en sesiones persistentes
+    def remember
+      self.remember_token = User.new_token
+      update_attribute(:remember_digest, User.digest(remember_token))
+      remember_digest
+    end
+
+    # Returns a session token to prevent session hijacking.
+    # We reuse the remember digest for convenience.
+    def session_token
+      remember_digest || remember
+    end
+    #Devuelve True si el token es igual al digest
+    def authenticated?(remember_token)
+      return false if remember_digest.nil?
+      BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    end
+    # Forgets a user.
+    def forget
+     update_attribute(:remember_digest, nil)
+    end
 end
