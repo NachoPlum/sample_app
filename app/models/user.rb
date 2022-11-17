@@ -13,7 +13,7 @@ class User < ApplicationRecord
   PASSWORD_REQUERIMENTS = /\A (?=.{8,}) (?=.*\d)(?=.*[a-z]) (?=.*[A-Z]) (?=.*[[:^alnum:]])/x
   # Validando, Min 8 char, Min 1 numero Min 1 Minuscula, Min 1 Mayuscula y Min 1 Simbolo
   #validates :password, format: PASSWORD_REQUERIMENTS
-  validates :password, presence: true, length: { minimum: 8 }, format: PASSWORD_REQUERIMENTS
+  validates :password, presence: true, length: { minimum: 8 },allow_nil: true, format: PASSWORD_REQUERIMENTS
 
     # Returns the hash digest of the given string.
     def self.digest(string)
