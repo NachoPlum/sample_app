@@ -88,4 +88,11 @@ first.last@foo.jp alice+bob@baz.cn]
     assert_not @user.authenticated?(:remember,'')
   end
 
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.microposts.create!(content: "I'ts a Trap!")
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
+    end
+  end
 end
