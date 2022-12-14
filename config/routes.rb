@@ -13,10 +13,15 @@
     get "/login",     to: "sessions#new"
     post "/login",    to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-
-    resources :users
+    # Rutas para obtener lista completa de seguidos y seguidores de cada usuario
+    resources :users do
+      member do
+        get :following, :followers
+      end
+    end
     resources :account_activations, only: [:edit]
     resources :password_resets,     only: [:new, :create, :edit, :update]
     resources :microposts,          only: [:create, :destroy]
+    resources :relationships,       only: [:create, :destroy]
     get '/microposts',                to: 'static_pages#home'
     end

@@ -1,0 +1,9 @@
+---
+name: sample_app
+language: ruby
+appmap_dir: tmp/appmap
+packages:
+- path: app/controllers
+- path: app/models
+- gem: activerecord
+exclude: []

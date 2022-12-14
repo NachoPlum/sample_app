@@ -1,0 +1,12 @@
+one:
+  follower: nacho
+  followed: lana
+two:
+  follower: nacho
+  followed: user_4
+three:
+  follower: lana
+  followed: nacho
+four:
+  follower: archer
+  followed: nacho

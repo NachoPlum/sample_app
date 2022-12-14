@@ -95,4 +95,38 @@ first.last@foo.jp alice+bob@baz.cn]
       @user.destroy
     end
   end
+
+
+  test "should follow and unfollow a user" do
+    nacho = users(:nacho)
+    archer = users(:archer)
+    assert_not nacho.following?(archer)
+    nacho.follow(archer)
+    assert nacho.following?(archer)
+    assert archer.followers.include?(nacho)
+    nacho.unfollow(archer)
+    assert_not nacho.following?(archer)
+    # Los usuarios no se pueden seguir a si mismos
+    nacho.follow(nacho)
+    assert_not nacho.following?(nacho)
+  end
+
+  test "feed should have the right posts" do
+    nacho  = users(:nacho)
+    archer = users(:archer)
+    lana   = users(:lana)
+    # Posts from followed user
+    lana.microposts.each do |post_following|
+      assert nacho.feed.include?(post_following)
+    end
+    # Self-posts for user with followers
+    nacho.microposts.each do |post_self|
+      assert nacho.feed.include?(post_self)
+      assert_equal nacho.feed.distinct, nacho.feed
+    end
+    # Posts from non-followed user
+    archer.microposts.each do |post_unfollowed|
+      assert_not nacho.feed.include?(post_unfollowed)
+    end
+  end
 end
