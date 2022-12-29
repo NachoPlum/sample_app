@@ -11,4 +11,8 @@
             <%= link_to "delete", micropost, data: { "turbo-method": :delete, turbo_confirm: "You sure?"} %>
         <% end %>
     </span>
+    <div id="like_form1_<%=micropost.id%>">
+        <%= render partial: "microposts/like_form", locals: {micropost: micropost} %>
+
+    </div>
 </li>

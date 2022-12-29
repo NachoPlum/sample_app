@@ -1,0 +1,10 @@
+<%= turbo_stream.update "like_form_#{@like.micropost.id}" do %>
+  <%if @like.nil?%>
+    <p>Error </p>
+  <%else%>
+    <%= render partial: "microposts/like_button", locals: { micropost: @like.micropost,like: @like }%>
+  <% end %>
+<% end %>
+<%= turbo_stream.update "like_counter_#{@like.micropost.id}" do %>
+  <%= @like.micropost.likes.length %> <%= "Like".pluralize(@like.micropost.likes.length) %>
+<% end %>

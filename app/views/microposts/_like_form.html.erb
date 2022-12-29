@@ -1,0 +1,17 @@
+<div id="like_counter_<%=micropost.id%>">
+    <%= micropost.likes.count%> <%= "Like".pluralize(micropost.likes.count) %>
+</div>
+<div id="like_form_<%=micropost.id%>">
+    <% like_user = user_like(micropost)%>
+    <% if like_user.nil? %>
+        <%= render partial: "microposts/like_button", locals: {micropost: micropost, like: like_user} %>
+    <% else %>
+        <%= render partial: "microposts/unlike_button", locals: { like: like_user }%>
+    <% end %>
+</div>
+
+
+
+
+
+
